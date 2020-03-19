@@ -12,7 +12,8 @@ const privKey = process.env.PRIVATE_KEY;
  * key as parameters and for third parameter you must add a hash created by
  * timestamp,privatekey, publickey, in that order.
  * @function
- * @return {Array}
+ * @return {Array<json>} Returns an array filled with json which represents the information
+ *                       of each character
  * 
  */
 const get = async () => {
@@ -23,7 +24,6 @@ const get = async () => {
         const URL = `${charactersUrl}limit=100&ts=${Date.now()}&apikey=${pKey}&hash=${hash}`
         let response = await fetch(URL, 'get');
         response = await response.json();
-        console.log(response)
         if(response.code == 200 && response.status == 'Ok'){
             data = {
                 code:response.code,
@@ -48,12 +48,10 @@ const get = async () => {
                 status:response.status
             }
         }
-        console.log(data)
         return data;
         
     }
     catch(err) {
-        console.log("ERROR")
         let data = {
             status:"Error",
             error: err
@@ -63,5 +61,4 @@ const get = async () => {
     }
 
 }
-get();
-// module.exports.get = get;
+module.exports.get = get;
