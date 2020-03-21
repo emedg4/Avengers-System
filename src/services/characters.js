@@ -1,6 +1,6 @@
 require('dotenv').config()
 const crypto = require('crypto');
-const fetch = require('./../utils/fetchUrl');
+const fetch = require('../utils/fetchUrl');
 const charactersUrl = process.env.URL_GET_CHARACTERS;
 const pKey = process.env.PUBLIC_KEY;
 const privKey = process.env.PRIVATE_KEY;
@@ -22,7 +22,7 @@ const get = async () => {
         const stringToHash = `${Date.now()}${privKey}${pKey}`
         const hash = await crypto.createHash('md5').update(stringToHash).digest("hex");
         const URL = `${charactersUrl}limit=100&ts=${Date.now()}&apikey=${pKey}&hash=${hash}`
-        let response = await fetch(URL, 'get');
+        let response = await fetch(URL);
         response = await response.json();
         if(response.code == 200 && response.status == 'Ok'){
             data = {

@@ -1,7 +1,7 @@
 const characters = require('./../services/characters');
 
 const getCharacters = async (req,res) => {
-    response = await characters.get();
+    const response = await characters.get();
     res.send(response);
 }
 

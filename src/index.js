@@ -1,7 +1,15 @@
-require('dotenv').config
+require('dotenv').config();
 const express = require('express');
+const characters = require( './routes/characters.router');
 const app = express();
-const characters = require('./routes/characters.router')
+global.AllCharacters = {};
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
+  
+  
 
 app.use('/characters', characters);
 
