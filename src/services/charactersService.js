@@ -69,10 +69,20 @@ const saveAllOnDB = async (data) => {
     
 }
 
-const modifyCharacter = async (body) => {
-
+const modifyCharacter = async (data) => {
+    const body = {
+        name: data.body.name,
+        description: data.body.description,
+        imageURL: data.body.imageURL
+    }
+    const modify = mongoDB.modify(body);
+    return modify;
 }
 
-module.exports.modifyCharacter = modifyCharacter
+const getAll = async () => {
+    return await mongoDB.getAll();
+}
+module.exports.getAll          = getAll;
+module.exports.modifyCharacter = modifyCharacter;
 module.exports.saveAllOnDB     = saveAllOnDB;
 module.exports.getFromMarvel   = getFromMarvel;

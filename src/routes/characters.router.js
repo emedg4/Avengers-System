@@ -17,8 +17,6 @@ router.delete('/', (req,res) => {
 });
 
 router.get('/all', (req, res) => {
-    characters.getCharacters(req, res);
+    characters.getAll(req, res);
 });
-
-
 module.exports = router;

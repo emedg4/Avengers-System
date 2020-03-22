@@ -27,8 +27,30 @@ const getCharacters = async (req, res) => {
 
 
 const modifyCharacter = async (req, res) => {
+    try {
+        const res = await  characters.modifyCharacter(req);
+        res.send(res);
+
+    }
+    catch(err){
+        console.error(`Could not update hero. Error : ${err}`);
+        res.sendStatus(500);
+    }
+
 
 }
 
+const getAll = async (req, res) => {
+    try {
+        const all = await characters.getAll();
+        res.send(all);
+    }
+    catch(err) {
+        console.log(`Could not get the heroes. Error : ${err}`);
+        res.sendStatus(500);
+    }
+}
+
+module.exports.getAll          = getAll;
 module.exports.modifyCharacter = modifyCharacter;
 module.exports.getCharacters   = getCharacters;

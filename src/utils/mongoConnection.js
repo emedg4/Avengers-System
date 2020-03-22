@@ -5,14 +5,13 @@ const hero       = mongoose.model('hero', heroSchema, 'Marvel');
 
 
 const MongoConnection = () => {
-
-    var mongoDB = 'mongodb://localhost:8000';
+    const mongoDB = process.env.MONGOURL;
     mongoose.connect(mongoDB,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
-        user: "root",
-        pass: "root",
-        dbName:"Marvel"
+        user: process.env.MONGO_USER,
+        pass: process.env.MONGO_PASS,
+        dbName:process.env.MONGO_DB
     } );
     var mongoConnection = mongoose.connection;
         
@@ -25,7 +24,6 @@ const MongoConnection = () => {
 
 const createHeroesList = (data) => {
     try {
-
         MongoConnection();
         data.forEach(element => {
             let avenger = new hero ({
@@ -47,9 +45,22 @@ const createHeroesList = (data) => {
 }
 
 const insert = async (data) => {
+        MongoConnection();
         return createHeroesList(data);
+}
 
-
+const modify = async (data) => {
+    MongoConnection();
+    return await hero.updateOne(data.name, data);
 
 }
+
+const getAll = async () => {
+    MongoConnection();
+    const filter = {}
+    return await hero.find(filter);
+}
+
+module.exports.getAll = getAll;
+module.exports.modify = modify
 module.exports.insert = insert;
