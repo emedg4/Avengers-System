@@ -28,8 +28,8 @@ const getCharacters = async (req, res) => {
 
 const modifyCharacter = async (req, res) => {
     try {
-        const res = await  characters.modifyCharacter(req);
-        res.send(res);
+        const response = await  characters.modifyCharacter(req);
+        res.send(response);
 
     }
     catch(err){

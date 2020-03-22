@@ -50,9 +50,9 @@ const insert = async (data) => {
         return createHeroesList(data);
 }
 
-const modify = async (data) => {
+const modify = async (data, filter) => {
     MongoConnection();
-    return await hero.updateOne(data.name, data);
+    return await hero.updateOne(filter, data);
 
 }
 

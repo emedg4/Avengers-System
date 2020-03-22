@@ -36,7 +36,7 @@ const getFromMarvel = async () => {
                     id:element.id,
                     name:element.name,
                     description:element.description,
-                    imageURL:element.thumbnail.path
+                    imageURL:`${element.thumbnail.path}/portrait_xlarge.jpg`
                 };
                 elements.push(info);                
             });
@@ -75,7 +75,7 @@ const modifyCharacter = async (data) => {
         description: data.body.description,
         imageURL: data.body.imageURL
     }
-    const modify = mongoDB.modify(body);
+    const modify = mongoDB.modify(body, data.body._id);
     return modify;
 }
 
