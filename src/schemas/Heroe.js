@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
-module.exports.heroSchema = new mongoose.Schema ({
+const heroSchema = new mongoose.Schema ({
     name: String,
     description: String,
     imageURL: String
 });
 
+module.exports.heroSchema = heroSchema;

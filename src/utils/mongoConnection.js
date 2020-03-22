@@ -1,7 +1,7 @@
 require('dotenv').config()
 const mongoose   = require('mongoose');
 const heroSchema = require('../schemas/Heroe');
-const hero       = mongoose.model('hero', heroSchema, 'Marvel');
+const hero       = mongoose.model('hero', heroSchema.heroSchema, 'Marvel');
 
 
 const MongoConnection = () => {
@@ -12,7 +12,7 @@ const MongoConnection = () => {
         user: process.env.MONGO_USER,
         pass: process.env.MONGO_PASS,
         dbName:process.env.MONGO_DB
-    } );
+    });
     var mongoConnection = mongoose.connection;
         
         mongoConnection.on('error',
@@ -33,6 +33,7 @@ const createHeroesList = (data) => {
             });
             avenger.save((err, avenger) => {
                 if (err) return err
+     
             });
             
         });
