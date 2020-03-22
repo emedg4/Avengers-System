@@ -1,9 +1,10 @@
 require('dotenv').config()
-const crypto = require('crypto');
-const fetch = require('../utils/fetchUrl');
+const crypto        = require('crypto');
+const fetch         = require('../utils/fetchUrl');
+const mongoDB       = require('../utils/mongoConnection');
 const charactersUrl = process.env.URL_GET_CHARACTERS;
-const pKey = process.env.PUBLIC_KEY;
-const privKey = process.env.PRIVATE_KEY;
+const pKey          = process.env.PUBLIC_KEY;
+const privKey       = process.env.PRIVATE_KEY;
 
 /**
  * This service gets 100 characters from Marvel developers api and
@@ -16,7 +17,7 @@ const privKey = process.env.PRIVATE_KEY;
  *                       of each character
  * 
  */
-const get = async () => {
+const getFromMarvel = async () => {
     try {
         let data = {};
         const stringToHash = `${Date.now()}${privKey}${pKey}`
@@ -56,9 +57,22 @@ const get = async () => {
             status:"Error",
             error: err
         }
-        console.log(data)
         return data;
     }
 
 }
-module.exports.get = get;
+
+
+const saveAllOnDB = async (data) => {
+        const insertion = await mongoDB.insert(data, "Hero");
+        return insertion;
+    
+}
+
+const modifyCharacter = async (body) => {
+
+}
+
+module.exports.modifyCharacter = modifyCharacter
+module.exports.saveAllOnDB     = saveAllOnDB;
+module.exports.getFromMarvel   = getFromMarvel;
