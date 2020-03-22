@@ -28,8 +28,14 @@ const getCharacters = async (req, res) => {
 
 const modifyCharacter = async (req, res) => {
     try {
+        
         const response = await  characters.modifyCharacter(req);
-        res.send(response);
+        const result = {
+            character: req.body,
+            queryStatus: response
+        }
+        console.log(result);
+        res.send(result);
 
     }
     catch(err){
