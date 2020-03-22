@@ -15,7 +15,7 @@ router.put('/', (req, res) => {
 });
 
 router.delete('/', (req,res) => {
-    characters.deleteCharacters(req,res);
+    characters.delCharacter(req,res);
 });
 
 router.get('/all', (req, res) => {

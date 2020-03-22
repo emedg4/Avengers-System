@@ -57,6 +57,23 @@ const getAll = async (req, res) => {
     }
 }
 
+const delCharacter = async (req, res) => {
+    try{
+        const deleted = await characters.delCharacter(req);
+        const result = {
+            character: req.body,
+            queryStatus: deleted
+        }
+        console.log(result);
+        res.send(result);
+        }
+    catch(err){
+        console.error(`Could not delete hero. Error : ${err}`);
+        res.sendStatus(500);
+    }
+}
+
+module.exports.delCharacter    = delCharacter;
 module.exports.getAll          = getAll;
 module.exports.modifyCharacter = modifyCharacter;
 module.exports.getCharacters   = getCharacters;

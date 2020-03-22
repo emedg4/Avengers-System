@@ -62,6 +62,13 @@ const getAll = async () => {
     return await hero.find(filter);
 }
 
-module.exports.getAll = getAll;
-module.exports.modify = modify
-module.exports.insert = insert;
+const deleteOne = async (filter) => {
+    MongoConnection();
+    return await hero.deleteOne(filter)
+
+}
+
+module.exports.deleteOne = deleteOne;
+module.exports.getAll    = getAll;
+module.exports.modify    = modify
+module.exports.insert    = insert;

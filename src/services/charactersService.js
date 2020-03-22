@@ -21,7 +21,7 @@ const getFromMarvel = async () => {
     try {
         let data = {};
         const stringToHash = `${Date.now()}${privKey}${pKey}`
-        const hash = await crypto.createHash('md5').update(stringToHash).digest("hex");
+        const hash = crypto.createHash('md5').update(stringToHash).digest("hex");
         const URL = `${charactersUrl}limit=100&ts=${Date.now()}&apikey=${pKey}&hash=${hash}`
         let response = await fetch(URL);
         response = await response.json();
@@ -82,6 +82,13 @@ const modifyCharacter = async (data) => {
 const getAll = async () => {
     return await mongoDB.getAll();
 }
+
+const delCharacter = async (data) => {
+    const del = mongoDB.deleteOne(data.body._id);
+    return del;
+}
+
+module.exports.delCharacter    = delCharacter;
 module.exports.getAll          = getAll;
 module.exports.modifyCharacter = modifyCharacter;
 module.exports.saveAllOnDB     = saveAllOnDB;
