@@ -1,4 +1,5 @@
 const characters = require('./../services/charactersService');
+const event      = require('../events/events');
 
 const getCharacters = async (req, res) => {
     try {
@@ -34,7 +35,7 @@ const modifyCharacter = async (req, res) => {
             character: req.body,
             queryStatus: response
         }
-        console.log(result);
+        EventHandler.publish(new event.characterModifiedEvent(req.body))
         res.send(result);
 
     }
@@ -64,7 +65,7 @@ const delCharacter = async (req, res) => {
             character: req.body,
             queryStatus: deleted
         }
-        console.log(result);
+        EventHandler.publish(new event.characterDeletedEvent(req.body))
         res.send(result);
         }
     catch(err){
