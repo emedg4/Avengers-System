@@ -1,33 +1,7 @@
-// import React, { Component } from 'react';
-// import List from './List';
-
-
-// class App extends Component {
-//     constructor(props){
-//         super(props);
-//         this.state = {};
-//     }
-//     componentDidMount() {
-//         fetch('http://localhost:8001/character/all')
-//           .then(data => this.setState(data));
-//       }
-    
-//     render() {
-//         return (
-//             <div>
-//                 <h1>Marvel Heroes</h1>
-//                 <h4> < List /> </h4>
-//             </div>
-//         )
-//     }
-// }
-
-// export default App;
-
 import f from '../utils/fetchUrl';
 import React, { Component } from 'react';
 const API = 'http://localhost:8001/characters/all';
-
+const APIDEL = 'http://localhost:8001/characters/'
 class App extends Component {
   constructor(props) {
     super(props);
@@ -36,24 +10,38 @@ class App extends Component {
       };
     };
   
-  componentDidMount() {
-    f(API, 'get')
-      .then(data => this.setState({ hits: data}));
-  }
 
-  render() {
+    deleteChar = async event => {
+        const id = event.target.value;
+        f(APIDEL,'del',id)
+    }
+
+    
+
+
+
+    componentDidMount() {
+    f(API, 'get')
+        .then(data => this.setState({ hits: data}));
+    }
+
+    render() {
     const items = this.state.hits;
     console.log(items)
     return (
-        <ul>
+        <div>
         {items.map(hit =>
-          <li key={hit._id}>
-            <a href={hit.name}>{hit.name}</a>
-          </li>
+            <ul key={hit._id}>
+                <img src={hit.imageURL} alt="not found"></img>
+                <span>Name : {hit.name}</span><br></br>
+                <span>Description: {hit.description}</span><br></br>
+                <button className='btn-delete' onClick={this.deleteChar} value={hit._id}>Delete</button>
+            
+            </ul>
         )}
-      </ul>
+        </div>
     );
-  }
+    }
 }
 
 
@@ -61,35 +49,3 @@ class App extends Component {
 
   export default App;
 
-
-// import React, { Component } from 'react';
-// const API = 'https://hn.algolia.com/api/v1/search?query=';
-// const DEFAULT_QUERY = 'redux';
-// class App extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       hits: [],
-//     };
-//   }
-//   componentDidMount() {
-//     fetch(API + DEFAULT_QUERY)
-//       .then(response => response.json())
-//       .then(data => this.setState({ hits: data.hits }));
-//   }
-  
-//   render() {
-//     const { hits } = this.state;
-//     console.log({ hits })
-//     return (
-//       <ul>
-//         {hits.map(hit =>
-//           <li key={hit.objectID}>
-//             <a href={hit.url}>{hit.title}</a>
-//           </li>
-//         )}
-//       </ul>
-//     );
-//   }
-// }
-// export default App;

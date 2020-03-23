@@ -61,12 +61,8 @@ const getAll = async (req, res) => {
 const delCharacter = async (req, res) => {
     try{
         const deleted = await characters.delCharacter(req);
-        const result = {
-            character: req.body,
-            queryStatus: deleted
-        }
         EventHandler.publish(new event.characterDeletedEvent(req.body))
-        res.send(result);
+        res.send(deleted);
         }
     catch(err){
         console.error(`Could not delete hero. Error : ${err}`);
