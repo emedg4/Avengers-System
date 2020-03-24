@@ -57,7 +57,6 @@ class App extends Component {
         const targets = pointer.getIndexesOfMatches(this.state.hits, point, "_id"); 
         let aboutToBeDeleted = this.state.hits;
         aboutToBeDeleted.splice(parseInt(targets[0],10),1);
-        console.log(aboutToBeDeleted)
         this.setState(aboutToBeDeleted); 
     }
 
@@ -76,7 +75,6 @@ class App extends Component {
     deleteChar = async event => {
         const id = event.target.value;
         const req = {"_id": id}
-        console.log(req)
         fetchUrl(APIDEL,'DELETE',req);
         
     }

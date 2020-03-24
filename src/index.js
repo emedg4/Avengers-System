@@ -14,9 +14,6 @@ const cors = require('cors');
 io.on('connection', (socket) => {
   console.log("Client connected to Socket Service on default namespace");
   
-  socket.on('disconnect', () => {
-    console.log('client disconnected...')
-  });
   EventHandler.subscribe(events.characterDeletedEvent, (data) => {
     io.emit('characterDeleted', data)
   });
@@ -27,6 +24,9 @@ io.on('connection', (socket) => {
   EventHandler.subscribe(events.Fill, () => {
     io.emit('fill')
   })
+  socket.on('disconnect', () => {
+    console.log('client disconnected...')
+  });
 });
 
 
