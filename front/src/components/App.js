@@ -49,7 +49,10 @@ class App extends Component {
         let point = data._id;
         point = [point];
         const targets = pointer.getIndexesOfMatches(this.state.hits, point, "_id"); 
-        console.log(targets)
+        // console.log(parseInt(targets[0],10), typeof parseInt(targets[0],10))
+        let aboutToBeDeleted = this.state.hits;
+        aboutToBeDeleted.splice(parseInt(targets[0],10),1);
+        this.setState(aboutToBeDeleted);        
     }
 
 
