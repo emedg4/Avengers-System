@@ -24,6 +24,9 @@ io.on('connection', (socket) => {
   EventHandler.subscribe(events.characterModifiedEvent, (data) => {
     io.emit('characterModified', data)
   });
+  EventHandler.subscribe(events.Fill, () => {
+    io.emit('fill')
+  })
 });
 
 

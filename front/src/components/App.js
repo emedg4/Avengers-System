@@ -42,6 +42,11 @@ class App extends Component {
     socket.on('characterDeleted', (data) => {
         this.delOneFromStat(data)
     });
+    socket.on('fill', async () => {
+        console.log("revieving update")
+        await this.update();
+        console.log("done")
+    });
     
 }
 
@@ -51,13 +56,26 @@ class App extends Component {
         const targets = pointer.getIndexesOfMatches(this.state.hits, point, "_id"); 
         let aboutToBeDeleted = this.state.hits;
         aboutToBeDeleted.splice(parseInt(targets[0],10),1);
-        this.setState(aboutToBeDeleted);        
+        console.log(aboutToBeDeleted)
+        this.setState(aboutToBeDeleted); 
     }
 
 
+    fill = async () => {
+        await fetchUrl(APIDEL)
+       
+    }
+
+    update = async () => {
+        const data = await fetchUrl(API)
+        this.setState({ hits: data});
+        }
+    
+    
     deleteChar = async event => {
         const id = event.target.value;
         const req = {"_id": id}
+        console.log(req)
         fetchUrl(APIDEL,'DELETE',req);
         
     }
@@ -68,27 +86,28 @@ class App extends Component {
     }
 
     render() {
-    const items = this.state.hits;
-    return (
-        <div>
-        {items.map(hit =>
-            <ul key={hit._id}>
-                <img src={hit.imageURL} alt="not found"></img>
+        const items = this.state.hits;
+        return (
+            <div>
+            <button className="btn-fill" onClick={this.fill}>Fill with heroes</button>
+            {items.map(hit =>
+                <ul key={hit._id}>
+                    <img src={hit.imageURL} alt="not found"></img>
 
-                <label for="c-name"> Name :</label>
-                <span id="c-name" placeholder="Name...."> {hit.name}</span><br></br>
+                    <label for="c-name"> Name :</label>
+                    <span id="c-name" placeholder="Name...."> {hit.name}</span><br></br>
 
-                <label for="c-desc">Description: </label>
+                    <label for="c-desc">Description: </label>
+                    
+                    <span id="c-desc"> {hit.description}</span><br></br>
+
+                    <button className='btn-delete' onClick={this.deleteChar} value={hit._id}>Delete</button>
                 
-                <span id="c-desc"> {hit.description}</span><br></br>
-
-                <button className='btn-delete' onClick={this.deleteChar} value={hit._id}>Delete</button>
-            
-            </ul>
-        )}
+                </ul>
+            )}
         </div>
-    );
+        );
+        }
     }
-}
-  export default App;
 
+export default App;

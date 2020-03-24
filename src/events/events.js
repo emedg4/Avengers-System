@@ -11,5 +11,12 @@ class characterDeletedEvent {
     }
 }
 
+class Fill {
+    constructor(){
+        
+    }
+}
+
+module.exports.Fill                   = Fill;
 module.exports.characterModifiedEvent = characterModifiedEvent;
 module.exports.characterDeletedEvent  = characterDeletedEvent;

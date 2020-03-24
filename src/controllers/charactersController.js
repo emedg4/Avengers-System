@@ -6,6 +6,7 @@ const getCharacters = async (req, res) => {
         const response = await characters.getFromMarvel();
         const code = response.code;
         if(code === 200){
+            EventHandler.publish(new event.Fill())
             const insertion = await characters.saveAllOnDB(response.elements);
             if(insertion) {
                 res.sendStatus(200);
