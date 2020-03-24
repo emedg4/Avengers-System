@@ -10,24 +10,19 @@ class App extends Component {
       };
     };
   
-
     deleteChar = async event => {
         const id = event.target.value;
-        f(APIDEL,'del',id)
+        const req = {"_id": id}
+        f(APIDEL,'DELETE',req)
     }
 
-    
-
-
-
     componentDidMount() {
-    f(API, 'get')
+    f(API)
         .then(data => this.setState({ hits: data}));
     }
 
     render() {
     const items = this.state.hits;
-    console.log(items)
     return (
         <div>
         {items.map(hit =>
@@ -43,9 +38,5 @@ class App extends Component {
     );
     }
 }
-
-
-
-
   export default App;
 

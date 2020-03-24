@@ -10,9 +10,10 @@ const fetchUrl = async (URL, method = null, body = null ) => {
         }
     }
     else{
+        let payload = JSON.stringify(body)
         options = {
             method: `${method}`,
-            body: body,
+            body: payload,
             headers: { 'Content-Type': 'application/json' }
         }
     }

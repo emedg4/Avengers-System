@@ -15,6 +15,7 @@ router.put('/', (req, res) => {
 });
 
 router.delete('/', (req,res) => {
+    console.log("weboooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo")
     characters.delCharacter(req,res);
 });
 

@@ -84,7 +84,7 @@ const getAll = async () => {
 }
 
 const delCharacter = async (data) => {
-    const del = mongoDB.deleteOne(data.body._id);
+    const del = mongoDB.deleteOne(data.body);
     return del;
 }
 

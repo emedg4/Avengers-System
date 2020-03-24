@@ -10,7 +10,7 @@ const http       = require('http').createServer(app);
 const io = socketIo(http);
 const cors = require('cors');
 
-
+///////////////////////////WEBSOCKETS//////////////////////////////////////
 const nsps = io.on('connection', (socket) => {
   console.log("Client connected to Socket Service on default namespace");
   socket.on('disconnect', () => {
@@ -18,6 +18,8 @@ const nsps = io.on('connection', (socket) => {
   });
 });
 
+
+///////////////////////////////////////EVENTS/////////////////////////////////////////////
 EventHandler.subscribe(events.characterDeletedEvent, (data) => {
   nsps.emit('characterDeleted', data)
 });
@@ -35,6 +37,9 @@ app.use(function(req, res, next) {
     res.header('Access-Control-Allow-Methods', "GET", "POST", "OPTIONS", "PUT", "DELETE");
     next();
   });
+
+
+  
 app.use('/characters', characters);
 
 
