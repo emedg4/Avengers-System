@@ -49,7 +49,6 @@ class App extends Component {
         let point = data._id;
         point = [point];
         const targets = pointer.getIndexesOfMatches(this.state.hits, point, "_id"); 
-        // console.log(parseInt(targets[0],10), typeof parseInt(targets[0],10))
         let aboutToBeDeleted = this.state.hits;
         aboutToBeDeleted.splice(parseInt(targets[0],10),1);
         this.setState(aboutToBeDeleted);        
@@ -75,8 +74,14 @@ class App extends Component {
         {items.map(hit =>
             <ul key={hit._id}>
                 <img src={hit.imageURL} alt="not found"></img>
-                <span>Name : {hit.name}</span><br></br>
-                <span>Description: {hit.description}</span><br></br>
+
+                <label for="c-name"> Name :</label>
+                <span id="c-name" placeholder="Name...."> {hit.name}</span><br></br>
+
+                <label for="c-desc">Description: </label>
+                
+                <span id="c-desc"> {hit.description}</span><br></br>
+
                 <button className='btn-delete' onClick={this.deleteChar} value={hit._id}>Delete</button>
             
             </ul>

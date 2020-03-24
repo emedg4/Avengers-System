@@ -38,6 +38,7 @@ const getFromMarvel = async () => {
                     description:element.description,
                     imageURL:`${element.thumbnail.path}/portrait_xlarge.jpg`
                 };
+                info.description = info.description == "" ? "Marvel didnt provided description" : info.description;
                 elements.push(info);                
             });
             data.elements = elements;
