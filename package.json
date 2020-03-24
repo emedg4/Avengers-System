@@ -4,7 +4,7 @@
   "description": "This is a test for myself to demostrate how fast can I learn to use several technologies. The point of this is to show the avengers information in a webpage using the marvel developers api.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js",
+    "start": "node src/index.js",
     "test": "mocha --timeout 10000"
   },
   "author": "Josue Zazueta",

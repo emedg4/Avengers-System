@@ -1,3 +1,4 @@
+
 import fetchUrl from '../utils/fetchUrl';
 import React, { Component } from 'react';
 import pointer from '../utils/getMatchesFromArray';
@@ -95,7 +96,7 @@ class App extends Component {
                     <img src={hit.imageURL} alt="not found"></img>
 
                     <label for="c-name"> Name :</label>
-                    <span id="c-name" placeholder="Name...."> {hit.name}</span><br></br>
+                    <span id="c-name" > {hit.name}</span><br></br>
 
                     <label for="c-desc">Description: </label>
                     

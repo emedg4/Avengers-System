@@ -21,4 +21,4 @@ const fetchUrl = async (URL, method = null, body = null ) => {
     return response.json();
 }
 
-module.exports = fetchUrl;
+export default fetchUrl;
