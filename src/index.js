@@ -11,23 +11,23 @@ const io = socketIo(http);
 const cors = require('cors');
 
 ///////////////////////////WEBSOCKETS//////////////////////////////////////
-const nsps = io.on('connection', (socket) => {
+io.on('connection', (socket) => {
   console.log("Client connected to Socket Service on default namespace");
+  
   socket.on('disconnect', () => {
     console.log('client disconnected...')
+  });
+  EventHandler.subscribe(events.characterDeletedEvent, (data) => {
+    io.emit('characterDeleted', data)
+  });
+  
+  EventHandler.subscribe(events.characterModifiedEvent, (data) => {
+    io.emit('characterModified', data)
   });
 });
 
 
-///////////////////////////////////////EVENTS/////////////////////////////////////////////
-EventHandler.subscribe(events.characterDeletedEvent, (data) => {
-  nsps.emit('characterDeleted', data)
-});
-
-EventHandler.subscribe(events.characterModifiedEvent, (data) => {
-  nsps.emit('characterModified', data)
-});
-
+////////////////////////////////////////////////////////////////////////
 app.use(cors());
 app.options('*', cors());
 app.use(bodyParser.json());
