@@ -5,7 +5,7 @@ const hero       = mongoose.model('hero', heroSchema.heroSchema, 'Marvel');
 
 
 const MongoConnection = () => {
-    const mongoDB = process.env.MONGOURL;
+    const mongoDB = process.env.MNG;
     mongoose.connect(mongoDB,{
         useNewUrlParser: true,
         useUnifiedTopology: true,
