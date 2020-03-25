@@ -15,7 +15,7 @@ services:
     image: mongo:3.6.17-xenial
     restart: always
     ports: 
-      - "8000:27017"
+      - "8004:27017"
     volumes: 
       - ./mongo:/data/db
     environment:
