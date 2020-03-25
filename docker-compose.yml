@@ -1,13 +1,15 @@
 version: '3'
 services:
   api:
-      container_name: avengers-api
-      restart: always
-      env_file:
-        - .env
-      build: .
-      ports: 
-        - "8001:8001"
+    container_name: avengers-api
+    restart: always
+    env_file:
+      - .env
+    build: .
+    ports: 
+      - "8001:8001"
+    networks: 
+      - avengers
 
   mongo:
     image: mongo:3.6.17-xenial
@@ -19,6 +21,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: root
+    networks: 
+      - avengers
 
   nginx:
     build: ./front/
@@ -27,4 +31,8 @@ services:
     env_file: 
       - ./front/.env
     ports:
-      - "8002:80"
+      - "8002:3000"
+    networks: 
+      - avengers
+networks:
+  avengers:

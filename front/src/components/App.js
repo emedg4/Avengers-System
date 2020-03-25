@@ -3,11 +3,6 @@ import fetchUrl from '../utils/fetchUrl';
 import React, { Component } from 'react';
 import pointer from '../utils/getMatchesFromArray';
 import io from 'socket.io-client';
-const server = 'http://localhost:8001';
-const API = 'http://localhost:8001/characters/all';
-const APIDEL = 'http://localhost:8001/characters/';
-
-
 
 
 class App extends Component {
@@ -16,11 +11,14 @@ class App extends Component {
     this.state = this.state = {
         hits: [],
       };
+      this.server ='http://127.0.0.1:8001'
+      this.API = 'http://127.0.0.1:8001/characters/all'
+      this.APIDEL ='http://127.0.0.1:8001/characters'
       this.websockets();
     };
 
     websockets = () => {
-    const socket = io.connect(server, {
+    const socket = io.connect(this.server, {
         reconnection: true,
         secure: false
         });
@@ -62,12 +60,12 @@ class App extends Component {
 
 
     fill = async () => {
-        await fetchUrl(APIDEL)
+        await fetchUrl(this.APIDEL)
        
     }
 
     update = async () => {
-        const data = await fetchUrl(API)
+        const data = await fetchUrl(this.API)
         this.setState({ hits: data});
         }
     
@@ -75,12 +73,12 @@ class App extends Component {
     deleteChar = async event => {
         const id = event.target.value;
         const req = {"_id": id}
-        fetchUrl(APIDEL,'DELETE',req);
+        fetchUrl(this.APIDEL,'DELETE',req);
         
     }
 
     componentDidMount() {
-    fetchUrl(API)
+    fetchUrl(this.API)
         .then(data => this.setState({ hits: data}));
     }
 
