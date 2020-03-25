@@ -44,7 +44,6 @@ class App extends Component {
     socket.on('fill', async () => {
         console.log("revieving update")
         await this.update();
-        console.log("done")
     });
     
 }

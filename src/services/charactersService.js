@@ -63,13 +63,27 @@ const getFromMarvel = async () => {
 
 }
 
-
-const saveAllOnDB = async (data) => {
+/**
+ * This function save all the characters in mongo db. If there is no db
+ * created the function creates one with the name avengers
+ * @function 
+ * @param {Array<object>} data Array of objects containing all the characters 
+ * @return returns an object with a succes or an error. its merely informative.
+ */
+ const saveAllOnDB = async (data) => {
         const insertion = await mongoDB.insert(data, "Hero");
         return insertion;
     
 }
 
+/**
+ * This function is in charge of modify characters from db taking as parameter
+ * an object.
+ * @function
+ * @param {Object} data object containing the information of the character
+ * that is going to be modified 
+ * @return returns an object with a succes or an error. its merely informative.
+ */
 const modifyCharacter = async (data) => {
     const body = {
         name: data.body.name,
@@ -80,10 +94,23 @@ const modifyCharacter = async (data) => {
     return modify;
 }
 
+/**
+ * This function recieves nothing as parameter and its in charge of bring
+ * every data in the collection.
+ * @function
+ * @return An array of objects containing all the data of characters
+ */
 const getAll = async () => {
     return await mongoDB.getAll();
 }
 
+/**
+ * This function is in charge of delete one character with the id specified
+ * @function
+ * @param {object} data Object containing one id value, used for look for 
+ * an element en eliminate it from the collection
+ * @return  returns an object with a succes or an error. its merely informative.
+ */
 const delCharacter = async (data) => {
     const del = mongoDB.deleteOne(data.body);
     return del;

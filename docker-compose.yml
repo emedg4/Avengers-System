@@ -23,13 +23,11 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: root
     networks: 
       - avengers
-
   nginx:
     build: ./front/
     container_name: avengers-nginx
     restart: always
-    env_file: 
-      - ./front/.env
+
     ports:
       - "8002:3000"
     networks: 
