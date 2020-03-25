@@ -7,8 +7,8 @@ const app        = express();
 const bodyParser = require('body-parser');
 const socketIo   = require('socket.io');
 const http       = require('http').createServer(app);
-const io = socketIo(http);
-const cors = require('cors');
+const io         = socketIo(http);
+const cors       = require('cors');
 
 ///////////////////////////WEBSOCKETS//////////////////////////////////////
 io.on('connection', (socket) => {
